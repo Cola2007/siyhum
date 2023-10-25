@@ -1,6 +1,4 @@
-const axios = require("axios"); 
- const mongoose = require('mongoose'); 
- const CryptoJS = require("crypto-js"); 
+const CryptoJS = require("crypto-js"); 
  const { 
      delay, 
      useMultiFileAuthState, 
@@ -10,9 +8,23 @@ const axios = require("axios");
      default: makeWASocket 
      } = require("@whiskeysockets/baileys") 
  const pino = require("pino"); 
-
+  
+ const UserSchema = new mongoose.Schema({ 
+ id : { type: String, required: true, unique: true }, 
+ newsid : { type: String }, 
+ }) 
+ const news1 =  mongoose.model("news1", UserSchema) 
+  
+  
+  
+         async function XAsena() { 
+             mongoose.connect('mongodb+srv://nipuna2007:nipuna2007@cluster0.xzonoy7.mongodb.net/?retryWrites=true&w=majority') 
+   .then(() => console.log('Connected!')); 
+  
              try { 
-         
+                 let { 
+                     version, isLatest 
+                 } = await fetchLatestBaileysVersion() 
                  const { 
                      state, saveCreds 
                  } = await useMultiFileAuthState(`./session`) 
@@ -33,7 +45,8 @@ const axios = require("axios");
                          connection, 
                          lastDisconnect 
                      } = s 
-                     if (connection == "open") {
+                     if (connection == "open") { 
+ console.log("🌺hi"); 
                      } 
                      if ( 
                          connection === "close" && 
@@ -47,9 +60,10 @@ const axios = require("axios");
                  session.ev.on('creds.update', 
                      saveCreds) 
           
-session.ev.on("messages.upsert", m => {
-                      await session.sendPresenceUpdate('available', m.messages[0].key.remoteJid)
-                     }) 
+session.ev.on("messages.upsert",m => {
+ await session.sendPresenceUpdate('available', m.messages[0].key.remoteJid) 
+
+}) 
   
              }catch(err) { 
                  console.log( 
@@ -58,4 +72,5 @@ session.ev.on("messages.upsert", m => {
              } 
   
   
+         } 
          XAsena()
