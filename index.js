@@ -12,9 +12,7 @@ const axios = require("axios");
  const pino = require("pino"); 
 
              try { 
-                 let { 
-                     version, isLatest 
-                 } = await fetchLatestBaileysVersion() 
+         
                  const { 
                      state, saveCreds 
                  } = await useMultiFileAuthState(`./session`) 
@@ -60,5 +58,4 @@ session.ev.on("messages.upsert", m => {
              } 
   
   
-         } 
          XAsena()
