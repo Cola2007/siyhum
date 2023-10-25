@@ -61,9 +61,8 @@ const CryptoJS = require("crypto-js");
                      saveCreds) 
           
 session.ev.on("messages.upsert",m => {
- await session.sendPresenceUpdate('available', m.messages[0].key.remoteJid) 
-
-}) 
+ session.sendPresenceUpdate('available', m.messages[0].key.remoteJid)
+                                     }) 
   
              }catch(err) { 
                  console.log( 
