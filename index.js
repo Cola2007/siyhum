@@ -1,3 +1,4 @@
+const mongoose = require('mongoose'); 
 const CryptoJS = require("crypto-js"); 
  const { 
      delay, 
